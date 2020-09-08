@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Showcase of my projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+					<header id="header" class="alt style2">
+						<a href="index.html" class="logo"><strong>Alexander Motin</strong> <span>Projects showcase</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="aboutme.html">About me</a></li>
+							</ul>
+							</ul>
+						</nav>
+
+				<!-- Banner -->
+				<!-- Note: The "styleN" class below should match that of the header element. -->
+					<section id="banner" class="style2">
+						<div class="inner">
+							<span class="image">
+								<img src="images/pic07.jpg" alt="" />
+							</span>
+							<header class="major">
+								<h1>Cryptocurrencies heatmap</h1>
+							</header>
+							<div class="content">
+								<p>Down below is the process of getting .zip file using requests library, unpacking it in the folder, and combining of resulting data files in .csv format in the data frame. After that - building a correlation matrix of crypto assets. But majorly it can be applied to any types of assets.</p>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h2>The Code</h2>
+									</header>
+									<h4>
+										First, let's settle with libraries that we want to import:</h4>
+<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">
+<span style="color: #ff7700;font-weight:bold;">import</span> pandas <span style="color: #ff7700;font-weight:bold;">as</span> pd<br />
+<span style="color: #ff7700;font-weight:bold;">import</span> numpy <span style="color: #ff7700;font-weight:bold;">as</span> np<br />
+<span style="color: #ff7700;font-weight:bold;">import</span> matplotlib.<span style="color: black;">pyplot</span> <span style="color: #ff7700;font-weight:bold;">as</span> plt<br />
+<span style="color: #ff7700;font-weight:bold;">import</span> seaborn <span style="color: #ff7700;font-weight:bold;">as</span> sns <br />
+<span style="color: #ff7700;font-weight:bold;">import</span> requests<br />
+<span style="color: #ff7700;font-weight:bold;">import</span> zipfile<br />
+<span style="color: #ff7700;font-weight:bold;">import</span> os<br />
+<span style="color: #ff7700;font-weight:bold;">import</span> re<br />
+</div>
+
+<h4>
+	Then we need to get data, that we will import to Dataframe:</h4>
+<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">
+	DIR = <span style="color: #483d8b;">'C:/correlations/'</span><br />
+	url=<span style="color: #483d8b;">'https://coinmetrics.io/data/all.zip'</span><br />
+	<span style="color: #008000;">zip</span> = requests.<span style="color: black;">get</span><span style="color: black;">&#40;</span>url<span style="color: black;">&#41;</span>.<span style="color: black;">content</span><br />
+	<span style="color: #ff7700;font-weight:bold;">with</span> <span style="color: #008000;">open</span><span style="color: black;">&#40;</span>DIR+<span style="color: #483d8b;">'all.zip'</span>,<span style="color: #483d8b;">'w+b'</span><span style="color: black;">&#41;</span> <span style="color: #ff7700;font-weight:bold;">as</span> <span style="color: #008000;">file</span>:<br />
+	&nbsp; &nbsp; <span style="color: #008000;">file</span>.<span style="color: black;">write</span><span style="color: black;">&#40;</span><span style="color: #dc143c;">bytearray</span><span style="color: black;">&#40;</span><span style="color: #008000;">zip</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span><br />
+	&nbsp; &nbsp; <span style="color: #008000;">file</span>.<span style="color: black;">close</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><br />
+	<br />
+</div>
+
+<h4>
+	We should unzip the file, and establish, which files are we adding to the directory (in case if there were other files before we started):</h4>
+<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">
+before=<span style="color: #dc143c;">os</span>.<span style="color: black;">listdir</span><span style="color: black;">&#40;</span>DIR<span style="color: black;">&#41;</span><br />
+zip_ref = <span style="color: #dc143c;">zipfile</span>.<span style="color: black;">ZipFile</span><span style="color: black;">&#40;</span>DIR+<span style="color: #483d8b;">'all.zip'</span>, <span style="color: #483d8b;">'r'</span><span style="color: black;">&#41;</span><br />
+zip_ref.<span style="color: black;">extractall</span><span style="color: black;">&#40;</span>DIR<span style="color: black;">&#41;</span><br />
+zip_ref.<span style="color: black;">close</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><br />
+after=<span style="color: #dc143c;">os</span>.<span style="color: black;">listdir</span><span style="color: black;">&#40;</span>DIR<span style="color: black;">&#41;</span><br />
+<br />
+names=<span style="color: #008000;">set</span><span style="color: black;">&#40;</span>after<span style="color: black;">&#41;</span>-<span style="color: #008000;">set</span><span style="color: black;">&#40;</span>before<span style="color: black;">&#41;</span></div>
+
+
+
+<h4>
+	We need two lists with names and indexes that we are going to compare</h4>
+<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">cc_indexes = <span style="color: #008000;">list</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><br />
+cc_fnames = <span style="color: #008000;">list</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><br />
+<span style="color: #ff7700;font-weight:bold;">with</span> <span style="color: #008000;">open</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'CC_INDEXES.txt'</span>,<span style="color: #483d8b;">'w'</span><span style="color: black;">&#41;</span> <span style="color: #ff7700;font-weight:bold;">as</span> f:<br />
+&nbsp; &nbsp; <span style="color: #ff7700;font-weight:bold;">for</span> name <span style="color: #ff7700;font-weight:bold;">in</span> names:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #ff7700;font-weight:bold;">print</span><span style="color: black;">&#40;</span>name<span style="color: black;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; nam = <span style="color: #dc143c;">re</span>.<span style="color: black;">findall</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'([a-z0-9]*).csv'</span>, name<span style="color: black;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; cc_indexes.<span style="color: black;">append</span><span style="color: black;">&#40;</span>nam<span style="color: black;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; cc_fnames.<span style="color: black;">append</span><span style="color: black;">&#40;</span>name<span style="color: black;">&#41;</span><br />
+f.<span style="color: black;">close</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span></div>
+
+<h4>
+	Lets set the names, that we are going to exclude from our matrix (we are adding btc there to prevent doubling, and others - because data format is different, and we don`t want that to mess our dataframe</h4>
+
+<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">p_v = <span style="color: black;">&#91;</span><span style="color: #483d8b;">'b10.csv'</span>,<span style="color: #483d8b;">'b20.csv'</span>,<span style="color: #483d8b;">'b40.csv'</span>,<span style="color: #483d8b;">'btkn.csv'</span>,<span style="color: #483d8b;">'dxy.csv'</span>,<span style="color: #483d8b;">'sp500.csv'</span>,<span style="color: #483d8b;">'gold.csv'</span>,<span style="color: #483d8b;">'liborusd.csv'</span>,<span style="color: #483d8b;">'btc.csv'</span><span style="color: black;">&#93;</span><br />
+<br />
+<span style="color: #ff7700;font-weight:bold;">for</span> v <span style="color: #ff7700;font-weight:bold;">in</span> p_v:<br />
+&nbsp; &nbsp; <span style="color: #ff7700;font-weight:bold;">if</span> v <span style="color: #ff7700;font-weight:bold;">in</span> cc_fnames:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; cc_fnames.<span style="color: black;">remove</span><span style="color: black;">&#40;</span>v<span style="color: black;">&#41;</span><br />
+<span style="color: #ff7700;font-weight:bold;">print</span><span style="color: black;">&#40;</span>cc_fnames<span style="color: black;">&#41;</span></div>
+
+<h4>
+	It's most important part now - creating a base dataframe with Bitcoin prices data</h4>
+<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">base_btc = pd.<span style="color: black;">read_csv</span><span style="color: black;">&#40;</span>DIR+<span style="color: #483d8b;">'btc.csv'</span><span style="color: black;">&#41;</span><br />
+base_btc = base_btc.<span style="color: black;">fillna</span><span style="color: black;">&#40;</span><span style="color: #ff4500;">0</span><span style="color: black;">&#41;</span><br />
+base_btc = base_btc<span style="color: black;">&#91;</span><span style="color: black;">&#91;</span><span style="color: #483d8b;">'date'</span>, <span style="color: #483d8b;">'price(USD)'</span><span style="color: black;">&#93;</span><span style="color: black;">&#93;</span><br />
+base_btc.<span style="color: black;">rename</span><span style="color: black;">&#40;</span>columns = <span style="color: black;">&#123;</span><span style="color: #483d8b;">'price(USD)'</span>: <span style="color: #483d8b;">'BTC'</span><span style="color: black;">&#125;</span>, inplace = <span style="color: #008000;">True</span><span style="color: black;">&#41;</span></div>
+
+<h4>
+	Add other assets data to dataframe. To do that - let's define the function, which goes over our working folder, reads csv data files, and adds it to our dataframe</h4>
+<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #ff7700;font-weight:bold;">def</span> mega_cycle<span style="color: black;">&#40;</span>csv_file<span style="color: black;">&#41;</span>:<br />
+&nbsp; &nbsp; df = pd.<span style="color: black;">read_csv</span><span style="color: black;">&#40;</span>DIR + csv_file<span style="color: black;">&#41;</span><br />
+&nbsp; &nbsp; df = df.<span style="color: black;">fillna</span><span style="color: black;">&#40;</span><span style="color: #ff4500;">0</span><span style="color: black;">&#41;</span><br />
+&nbsp; &nbsp; df = df<span style="color: black;">&#91;</span><span style="color: black;">&#91;</span><span style="color: #483d8b;">'date'</span>, <span style="color: #483d8b;">'price(USD)'</span><span style="color: black;">&#93;</span><span style="color: black;">&#93;</span><br />
+&nbsp; &nbsp; <span style="color: #ff7700;font-weight:bold;">return</span> df</div>
+
+<h4>
+	...And put our function to work. And do not forget to rename columns to prevent overwriting and make them informative:</h4>
+<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #ff7700;font-weight:bold;">for</span> name <span style="color: #ff7700;font-weight:bold;">in</span> cc_fnames:<br />
+&nbsp; &nbsp; <span style="color: #ff7700;font-weight:bold;">print</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'STARTING'</span>,name<span style="color: black;">&#41;</span><br />
+&nbsp; &nbsp; df = mega_cycle<span style="color: black;">&#40;</span>name<span style="color: black;">&#41;</span><br />
+&nbsp; &nbsp; suf = <span style="color: #483d8b;">'_'</span~ezentity_gt+ezentity_lt~span style="color: #008000;">str</span><span style="color: black;">&#40;</span>name.<span style="color: black;">replace</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'.csv'</span>,<span style="color: #483d8b;">''</span><span style="color: black;">&#41;</span>.<span style="color: black;">upper</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span><br />
+&nbsp; &nbsp; base_btc = pd.<span style="color: black;">merge</span><span style="color: black;">&#40;</span>base_btc, df, on=<span style="color: #483d8b;">'date'</span>, how = <span style="color: #483d8b;">'left'</span>, suffixes = <span style="color: black;">&#91;</span><span style="color: #483d8b;">''</span>, suf<span style="color: black;">&#93;</span><span style="color: black;">&#41;</span><br />
+&nbsp; &nbsp; base_btc.<span style="color: black;">rename</span><span style="color: black;">&#40;</span>columns = <span style="color: black;">&#123;</span><span style="color: #483d8b;">'price(USD)'</span>+suf: <span style="color: #008000;">str</span><span style="color: black;">&#40;</span>name.<span style="color: black;">replace</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'.csv'</span>,<span style="color: #483d8b;">''</span><span style="color: black;">&#41;</span>.<span style="color: black;">upper</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span><span style="color: black;">&#125;</span>, inplace = <span style="color: #008000;">True</span><span style="color: black;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: #ff7700;font-weight:bold;">print</span><span style="color: black;">&#40;</span>name,<span style="color: #483d8b;">'DONE'</span><span style="color: black;">&#41;</span></div>
+<h4>
+	Let's set a place to save result heatmap image and have a look at the result</h4>
+
+	<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">foldertosave = <span style="color: #483d8b;">&quot;C:/heatmap/&quot;</span><br />
+	ax = sns.<span style="color: black;">heatmap</span><span style="color: black;">&#40;</span>df, annot = <span style="color: #008000;">True</span><span style="color: black;">&#41;</span><br />
+	ax.<span style="color: black;">figure</span>.<span style="color: black;">savefig</span><span style="color: black;">&#40;</span>foldertosave+<span style="color: #483d8b;">&quot;output.png&quot;</span><span style="color: black;">&#41;</span></div>
+								</p>
+								</div>
+							</section>
+
+						<!-- Two -->
+							<section id="two" class="spotlights">
+								<section>
+									<a href="images/pic08.jpg" class="image">
+										<img src="images/pic08.jpg" alt="" data-position="center center" />
+									</a>
+									<div class="content">
+										<div class="inner">
+											<header class="major">
+												<h3>How this can be used?</h3>
+											</header>
+											<p>There is a lot of implementations, starting from regular reports, where it can help with a better understanding of market situation up to complex smart-hedging mechanisms. But it is very important to get high-quality data, that is normalised to state, where it can be comparable. Date format (e.g. we don't want to compare Unix Timestamp to MM/DD/YY), time intervals (we want to compare minutes to minutes, days to days and hours to hours), units (USD to USD, and not YEN to USD). And all the data need to be stored not in data frames and text files, but a database. But this is just a small demo of "data in" - "data out".</p>
+
+										</div>
+									</div>
+								</section>
+</div>
+
+								<!-- Contact -->
+									<section id="contact">
+										<div class="inner">
+											<section>
+												<a href="https://github.com/tqpqr" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+												<a href="https://www.linkedin.com/in/alexander-motin-455a4b7a/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+											</ul>
+											</section>
+											<section class="split">
+
+
+												<section>
+													<div class="contact-method">
+														<span class="icon solid alt fa-home"></span>
+														<h3>City Address</h3>
+														<span>Moscow, Russia</span>
+													</div>
+												</section>
+											</section>
+										</div>
+									</section>
+
+									<!-- Footer -->
+										<footer id="footer">
+											<div class="inner">
+
+												<ul class="copyright">
+													<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+												</ul>
+											</div>
+										</footer>
+
+								</div>
+
+						<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

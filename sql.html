@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Showcase of my projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+					<header id="header" class="alt style2">
+						<a href="index.html" class="logo"><strong>Alexander Motin</strong> <span>Python Projects showcase</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="aboutme.html">About me</a></li>
+							</ul>
+							</ul>
+						</nav>
+
+				<!-- Banner -->
+				<!-- Note: The "styleN" class below should match that of the header element. -->
+					<section id="banner" class="style2">
+						<div class="inner">
+							<span class="image">
+								<img src="images/pic07.jpg" alt="" />
+							</span>
+							<header class="major">
+								<h1>Interacting with SQL Database</h1>
+							</header>
+							<div class="content">
+
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h2>The Code</h2>
+									</header>
+                  <h4>First things first:</h4>
+									<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><ol><li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #808080; font-style: italic;"># Creating DB file or connecting to the existing one:</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;">conn = sqlite3.<span style="color: black;">connect</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'database_name.sqlite'</span><span style="color: black;">&#41;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #808080; font-style: italic;"># Variable with our DB cursor:</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;">cur = conn.<span style="color: black;">cursor</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #808080; font-style: italic;"># SQL request to get Link column (where parsed links are stored) from table Data:</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;">sql = <span style="color: #483d8b;">&quot;SELECT Link FROM Data&quot;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;">cur.<span style="color: black;">execute</span><span style="color: black;">&#40;</span>sql<span style="color: black;">&#41;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #808080; font-style: italic;"># Saving result of request (tuple) to variable:</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;">request = cur.<span style="color: black;">fetchall</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span></div></li>
+
+</ol></div>
+
+<p>
+
+									<h4>Drop old table and create a new one, with required column names and data types:</h4>
+
+
+
+									<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><ol><li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #ff7700;font-weight:bold;">def</span> drop_db<span style="color: black;">&#40;</span><span style="color: black;">&#41;</span>:</div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;">&nbsp; &nbsp; cur.<span style="color: black;">executescript</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">''</span><span style="color: #483d8b;">'</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;DROP TABLE IF EXISTS Data;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;CREATE TABLE Data (</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;id &nbsp;INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;Name &nbsp; &nbsp;TEXT,</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;Gender TEXT,</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;Picture BLOB,</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;Price TEXT,</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;Status TEXT,</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;Link TEXT UNIQUE</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;);</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;"><span style="color: #483d8b;"> &nbsp; &nbsp;'</span><span style="color: #483d8b;">''</span><span style="color: black;">&#41;</span></div></li>
+<li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;">&nbsp; &nbsp; conn.<span style="color: black;">commit</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span></div></li>
+</ol></div>
+<p>
+	<h4>Saving data, and ignoring errors, if something is missing:</h4>
+	<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><ol><li style="font-weight: normal; vertical-align:top;font: normal normal 130% 'Courier New', Courier, monospace; color: #003030;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;;white-space: nowrapcolor: #000020;">cur.<span style="color: black;">execute</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">''</span><span style="color: #483d8b;">'INSERT OR IGNORE INTO Data (Name, Gender, Pictures, Price, Status, Link) VALUES (?,?,?,?,?,?)'</span><span style="color: #483d8b;">''</span>,<span style="color: black;">&#40;</span>title_tag, gender, pics, price, status, source_link<span style="color: black;">&#41;</span><span style="color: black;">&#41;</span></div></li>
+</ol></div>
+</section>
+</div>
+
+
+
+
+<!-- Contact -->
+	<section id="contact">
+		<div class="inner">
+			<section>
+				<a href="https://github.com/tqpqr" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+				<a href="https://www.linkedin.com/in/alexander-motin-455a4b7a/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+			</ul>
+			</section>
+			<section class="split">
+
+
+				<section>
+					<div class="contact-method">
+						<span class="icon solid alt fa-home"></span>
+						<h3>City Address</h3>
+						<span>Moscow, Russia</span>
+					</div>
+				</section>
+			</section>
+		</div>
+	</section>
+
+	<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+
+				<ul class="copyright">
+					<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</div>
+		</footer>
+
+</div>
+
+<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

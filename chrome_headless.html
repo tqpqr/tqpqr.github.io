@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Showcase of my projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+					<header id="header" class="alt style2">
+						<a href="index.html" class="logo"><strong>Alexander Motin</strong> <span>Python Projects showcase</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="aboutme.html">About me</a></li>
+							</ul>
+							</ul>
+						</nav>
+
+				<!-- Main -->
+					<div id="main" class="alt">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h1>Starting Selenium Web Driver on VPS</h1>
+										<p>Starting and running Selenium on the virtual server under the control of Ubuntu Linux. </p><p>The tricky part here is - virtual servers don't have displays, so before Web Driver can be started we need to emulate one.</p>
+									</header>
+									<span class="image main"><img src="images/selenium2.jpg" alt="" /></span>
+
+									<h4>You need to make sure, that your system has at least 1024 MB of RAM.</h4>
+                  <h4>Also, there are a few things that need to be present in code to successfully start Selenium on Ubuntu server without a graphical interface.</h4>
+<p>The Main thing - is X virtual framebuffer.
+Installing Xvfb is very simple:
+<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">
+	<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">sudo apt update<br />
+	sudo apt install xvfb</div></div>
+
+<p>Then we need to run it:
+<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">Xvfb :<span style="color: #ff4500;">1</span> -screen <span style="color: #ff4500;">99</span> 1024x768x32</div>
+
+<p>Now the server will listen for connections as server number 1,
+and screen № 99 will have "depth" 32 bit 1024x768.
+
+<p>To successfully use our new virtual display with the interpreter, we need to have a python wrapper for xvfb - pyvirtualdisplay.
+https://github.com/ponty/PyVirtualDisplay
+
+<p>It might be installed from the repository with <div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;">pip install pyvirtualdisplay</div>
+<h4>Notice: Xvfb need to be PRE-installed in the system and virtual display needs to be started before running Selenium </h4></p>
+<p>Now lets get to our Python code:
+	<div class="python" style="font-family:monospace;color: #006; border: 1px solid #d0d0d0; background-color: #f0f0f0;"><span style="color: #808080; font-style: italic;">#!/usr/bin/python3</span><br />
+<br />
+<span style="color: #ff7700;font-weight:bold;">from</span> selenium <span style="color: #ff7700;font-weight:bold;">import</span> webdriver<br />
+<span style="color: #ff7700;font-weight:bold;">from</span> selenium.<span style="color: black;">webdriver</span>.<span style="color: black;">chrome</span>.<span style="color: black;">options</span> <span style="color: #ff7700;font-weight:bold;">import</span> Options<br />
+<span style="color: #ff7700;font-weight:bold;">from</span> pyvirtualdisplay <span style="color: #ff7700;font-weight:bold;">import</span> Display<br />
+<br />
+<br />
+<span style="color: #808080; font-style: italic;"># Setting the resolution of virtual display and</span><br />
+<span style="color: #808080; font-style: italic;"># starting X virtual framebuffer wrapper</span><br />
+display = Display<span style="color: black;">&#40;</span>visible=<span style="color: #ff4500;">0</span>, size=<span style="color: black;">&#40;</span><span style="color: #ff4500;">1024</span>,<span style="color: #ff4500;">768</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span><br />
+display.<span style="color: black;">start</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><br />
+<br />
+<span style="color: #808080; font-style: italic;"># Initializing browser with required settings</span><br />
+<span style="color: #808080; font-style: italic;"># in this case - setting the default directory</span><br />
+<span style="color: #808080; font-style: italic;"># where files will be downloaded (in 'prefs')</span><br />
+<br />
+options = webdriver.<span style="color: black;">ChromeOptions</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><br />
+options.<span style="color: black;">add_argument</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">&quot;--no-sandbox&quot;</span><span style="color: black;">&#41;</span><br />
+<br />
+prefs = <span style="color: black;">&#123;</span><span style="color: #483d8b;">&quot;download.default_directory&quot;</span> : <span style="color: #483d8b;">&quot;/var/www/pub/&quot;</span><span style="color: black;">&#125;</span><br />
+options.<span style="color: black;">add_experimental_option</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">&quot;prefs&quot;</span>,prefs<span style="color: black;">&#41;</span><br />
+<br />
+driver = webdriver.<span style="color: black;">Chrome</span><span style="color: black;">&#40;</span>options=options<span style="color: black;">&#41;</span><br />
+<br />
+driver.<span style="color: black;">get</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'https://bloomberg.com'</span><span style="color: black;">&#41;</span><br />
+<br />
+driver.<span style="color: black;">close</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><br />
+driver.<span style="color: black;">quit</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><br />
+display.<span style="color: black;">stop</span><span style="color: black;">&#40;</span><span style="color: black;">&#41;</span></div>
+
+<p>Et Voila. It does the trick.
+
+								</div>
+							</section>
+
+					</div>
+
+					<!-- Contact -->
+						<section id="contact">
+							<div class="inner">
+								<section>
+									<a href="https://github.com/tqpqr" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+									<a href="https://www.linkedin.com/in/alexander-motin-455a4b7a/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								</ul>
+								</section>
+								<section class="split">
+
+
+									<section>
+										<div class="contact-method">
+											<span class="icon solid alt fa-home"></span>
+											<h3>City Address</h3>
+											<span>Moscow, Russia</span>
+										</div>
+									</section>
+								</section>
+							</div>
+						</section>
+
+						<!-- Footer -->
+							<footer id="footer">
+								<div class="inner">
+
+									<ul class="copyright">
+										<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+									</ul>
+								</div>
+							</footer>
+
+					</div>
+
+			<!-- Scripts -->
+				<script src="assets/js/jquery.min.js"></script>
+				<script src="assets/js/jquery.scrolly.min.js"></script>
+				<script src="assets/js/jquery.scrollex.min.js"></script>
+				<script src="assets/js/browser.min.js"></script>
+				<script src="assets/js/breakpoints.min.js"></script>
+				<script src="assets/js/util.js"></script>
+				<script src="assets/js/main.js"></script>
+
+		</body>
+	</html>
