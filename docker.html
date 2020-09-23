@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Showcase of my projects</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-177549622-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-177549622-1');
+</script>
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+				<!-- Note: The "styleN" class below should match that of the banner element. -->
+					<header id="header" class="alt style2">
+						<a href="index.html" class="logo"><strong>Alexander Motin</strong> <span>Python Projects showcase</span></a>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+					<!-- Menu -->
+						<nav id="menu">
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="aboutme.html">About me</a></li>
+							</ul>
+							</ul>
+						</nav>
+
+				<!-- Banner -->
+				<!-- Note: The "styleN" class below should match that of the header element. -->
+					<section id="banner" class="style2">
+						<div class="inner">
+							<span class="image">
+								<img src="images/pic07.jpg" alt="" />
+							</span>
+							<header class="major">
+								<h1>How to containerize with Docker (some of CI/CD stuff)</h1>
+							</header>
+							<div class="content">
+								<p>Example of containerizing of a Flask app with Docker</p>
+							</div>
+						</div>
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- One -->
+							<section id="one">
+								<div class="inner">
+									<header class="major">
+										<h2>The Code</h2>
+									</header>
+									<h4>Let's make an app that returns the machine IP address. Our app will be based on "requests" library. It will make a request to http://httpbin.org/ip and get the answer in string format. In browser it looks like that: </h4>
+									<img src="images/httpbin.png" alt="" />
+
+
+
+
+ <p>
+							<h4>To parse this information we will write a small code:</h4>
+							<pre class="python" style="font-family:monospace;"><ol><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #ff7700;font-weight:bold;">import</span> requests</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #ff7700;font-weight:bold;">import</span> <span style="color: #dc143c;">re</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #ff7700;font-weight:bold;">def</span> ip_return<span style="color: black;">&#40;</span><span style="color: black;">&#41;</span>:</div></li><li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">    ip <span style="color: #66cc66;">=</span> requests.<span style="color: black;">get</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">&quot;http://httpbin.org/ip&quot;</span><span style="color: black;">&#41;</span>.<span style="color: black;">text</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">    ip_2 <span style="color: #66cc66;">=</span> <span style="color: #dc143c;">re</span>.<span style="color: black;">findall</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'origin&quot;: &quot;(.*)&quot;'</span><span style="color: #66cc66;">,</span>ip<span style="color: black;">&#41;</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">    <span style="color: #ff7700;font-weight:bold;">return</span> ip_2<span style="color: black;">&#91;</span><span style="color: #ff4500;">0</span><span style="color: black;">&#93;</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #ff7700;font-weight:bold;">print</span><span style="color: black;">&#40;</span>ip_return<span style="color: black;">&#40;</span><span style="color: black;">&#41;</span><span style="color: black;">&#41;</span></div></li></ol></pre>
+
+							<p><h4>In Flask it will look something like this:</h4>
+								<pre class="python" style="font-family:monospace;"><ol><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #ff7700;font-weight:bold;">from</span> flask <span style="color: #ff7700;font-weight:bold;">import</span> Flask</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #ff7700;font-weight:bold;">import</span> requests</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #ff7700;font-weight:bold;">import</span> <span style="color: #dc143c;">re</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li><li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">app <span style="color: #66cc66;">=</span> Flask<span style="color: black;">&#40;</span>__name__<span style="color: black;">&#41;</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #66cc66;">@</span>app.<span style="color: black;">route</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">&quot;/&quot;</span><span style="color: black;">&#41;</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #ff7700;font-weight:bold;">def</span> ip_return<span style="color: black;">&#40;</span><span style="color: black;">&#41;</span>:</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">    ip <span style="color: #66cc66;">=</span> requests.<span style="color: black;">get</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">&quot;http://httpbin.org/ip&quot;</span><span style="color: black;">&#41;</span>.<span style="color: black;">text</span></div></li><li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">    ip_2 <span style="color: #66cc66;">=</span> <span style="color: #dc143c;">re</span>.<span style="color: black;">findall</span><span style="color: black;">&#40;</span><span style="color: #483d8b;">'origin&quot;: &quot;(.*)&quot;'</span><span style="color: #66cc66;">,</span>ip<span style="color: black;">&#41;</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">    <span style="color: #ff7700;font-weight:bold;">return</span> ip_2<span style="color: black;">&#91;</span><span style="color: #ff4500;">0</span><span style="color: black;">&#93;</span></div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">&nbsp;</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #ff7700;font-weight:bold;">if</span> __name__ <span style="color: #66cc66;">==</span> <span style="color: #483d8b;">&quot;__main__&quot;</span>:</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">    app.<span style="color: black;">run</span><span style="color: black;">&#40;</span>host<span style="color: #66cc66;">=</span><span style="color: #483d8b;">&quot;0.0.0.0&quot;</span><span style="color: black;">&#41;</span></div></li></ol></pre>
+							<p>
+							<h4>Let's save our code as app.py and prepare the Dockerfile:</h4>
+							<pre class="dos" style="font-family:monospace;"><ol><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">FROM python:3.6.1-alpine</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">RUN pip install flask</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">RUN pip install requests</div></li><li style="font-weight: normal; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;">CMD [&quot;python&quot;,&quot;app.py&quot;]</div></li><li style="font-weight: bold; vertical-align:top;"><div style="font: normal normal 1em/1.2em monospace; margin:0; padding:0; background:none; vertical-align:top;"><span style="color: #b1b100; font-weight: bold;">COPY</span> app.py /app.py</div></li></ol></pre>
+							<p>
+								<h4>Building the image (using the console):</h4>
+								<pre class="vb" style="font-family:monospace;">docker image build -t ipreturn .</pre>
+								<img src="images/building.png" alt="" />
+							<p>
+									<h4>Let's check out if our image is on its place:</h4>
+									<pre class="vb" style="font-family:monospace;">docker image ls</pre>
+									<img src="images/image_ls.png" alt="" />
+							<p>
+								<h4>Running the container (with binding the inner port 5000 to external port 5005):</h4>
+								<pre class="vb" style="font-family:monospace;">docker run -p 5005:5000 -d ipreturn</pre>
+								<img src="images/running.png" alt="" />
+							<p>
+								<h4>Let’s have a look at the result of our work and check out http://localhost:5005/</h4>
+							  <img src="images/ip.png" alt="" />
+							<p>
+								<h4>Now we can push our container to the repository and deploy it anywhere and anytime:</pre>
+								<pre class="vb" style="font-family:monospace;">docker login</pre>
+								<pre class="vb" style="font-family:monospace;">docker tag ipreturn LOGIN/CONTAINER_NAME</pre>
+								<pre class="vb" style="font-family:monospace;">docker push LOGIN/CONTAINER_NAME</pre>
+								<img src="images/push.png" alt="" />
+							<p>
+								<h4>And our app is on the Docker Hub</pre>
+								<img src="images/hub.png" alt="" />
+
+	<!-- Contact -->
+		<section id="contact">
+			<div class="inner">
+				<section>
+					<a href="https://github.com/tqpqr" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+					<a href="https://www.linkedin.com/in/alexander-motin-455a4b7a/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+				</ul>
+				</section>
+				<section class="split">
+
+
+					<section>
+						<div class="contact-method">
+							<span class="icon solid alt fa-home"></span>
+							<h3>City Address</h3>
+							<span>Moscow, Russia</span>
+						</div>
+					</section>
+				</section>
+			</div>
+		</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="inner">
+
+					<ul class="copyright">
+						<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+	</div>
+
+<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
